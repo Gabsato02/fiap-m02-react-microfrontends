@@ -3,5 +3,5 @@ WORKDIR /app
 COPY . .
 RUN npm install
 RUN npm run build
-EXPOSE 8500
-CMD ["npm", "start", "--", "--port", "8500"]
+EXPOSE 9002
+CMD ["npm", "start", "--", "--port", "9002"]

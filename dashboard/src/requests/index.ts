@@ -1,6 +1,6 @@
 import { AUTH_TOKEN } from "../vars";
 
-const BASE_URL = "http://localhost:9004";
+const BASE_URL = "http://luizin.duckdns.org:9004";
 
 const getAuthToken = (): string => {
   return localStorage.getItem(AUTH_TOKEN) || "";

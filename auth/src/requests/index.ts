@@ -1,4 +1,4 @@
-const BASE_URL = 'http://localhost:3000';
+const BASE_URL = 'http://luizin.duckdns.org:9004';
 
 const getAuthToken = (): string => {
   return localStorage.getItem('authToken') || '';

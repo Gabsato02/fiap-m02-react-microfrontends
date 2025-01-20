@@ -5,7 +5,7 @@ const path = require('path');
 const jwt = require('jsonwebtoken');
 
 const app = express();
-const PORT = 3000;
+const PORT = 9004;
 const DB_PATH = path.resolve(__dirname, 'db.json');
 const SECRET_KEY = 'JWT_SECRET_KEY';
 
@@ -165,5 +165,5 @@ app.put('/transactions/:id', authenticate, (req, res) => {
 
 // Iniciar o servidor
 app.listen(PORT, () => {
-	console.log(`Servidor rodando em http://localhost:${PORT}`);
+	console.log(`Servidor rodando em http://luizin.duckdns.org:${PORT}`);
 });

@@ -7,7 +7,7 @@ const authController = require('./controllers/authController');
 const transactionController = require('./controllers/transactionController');
 
 const app = express();
-const PORT = 3000;
+const PORT = 9004;
 
 // Middleware
 app.use(bodyParser.json());
@@ -36,5 +36,5 @@ app.put(
 
 // Iniciar o servidor
 app.listen(PORT, () => {
-	console.log(`Servidor rodando em http://localhost:${PORT}`);
+	console.log(`Servidor rodando em http://luizin.duckdns.org:${PORT}`);
 });

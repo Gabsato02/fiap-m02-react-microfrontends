@@ -1,29 +1,29 @@
-version: '3.8'
+version: "3.8"
 services:
   backend:
     build:
       context: ./backend
     ports:
-      - "3000:3000"
+      - "9004:9004"
   dashboard:
     build:
       context: ./dashboard
     ports:
-      - "8501:8501"
+      - "9003:9003"
     depends_on:
       - backend
   auth:
     build:
       context: ./auth
     ports:
-      - "8500:8500"
+      - "9002:9002"
     depends_on:
       - backend
   notfound:
     build:
       context: ./notfound
     ports:
-      - "8502:8502"
+      - "9001:9001"
     depends_on:
       - backend
   orchestrator:
