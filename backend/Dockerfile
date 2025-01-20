@@ -8,7 +8,7 @@ WORKDIR /app
 COPY package*.json ./
 
 # Instale as dependências em um estágio intermediário para aproveitar o cache
-RUN npm install --production
+RUN npm install --no-cache --production
 
 # Copie o restante dos arquivos da aplicação
 COPY . .
