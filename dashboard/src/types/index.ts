@@ -4,7 +4,7 @@ export type UserData = {
   balance: number;
   id: string;
   history: [];
-}
+};
 
 export type Transaction = {
   id: number;
@@ -13,4 +13,9 @@ export type Transaction = {
   amount: number;
   type: string;
   date: string;
+};
+
+export interface PaginatedTransactions {
+  transactions: Transaction[];
+  total: number;
 }

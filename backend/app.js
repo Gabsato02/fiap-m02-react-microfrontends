@@ -23,6 +23,7 @@ app.get(
 	authMiddleware.authenticate,
 	transactionController.listTransactions
 );
+
 app.post(
 	'/transactions',
 	authMiddleware.authenticate,

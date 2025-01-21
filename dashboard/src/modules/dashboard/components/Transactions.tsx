@@ -4,7 +4,6 @@ import { Transaction } from "../../../types";
 import { formatDate } from "../../../utils";
 import { useRecoilState } from "recoil";
 import { transactionsState } from "../../../store/atoms";
-import TransactionModal from "./TransactionModal";
 import TransactionModalEdit from "./TransactionModalEdit";
 
 export default function Transactions() {
@@ -23,6 +22,10 @@ export default function Transactions() {
   const [selectedTransaction, setSelectedTransaction] =
     useState<Transaction | null>(null);
 
+  // Estados para paginação
+  const [page, setPage] = useState(1);
+  const [hasMore, setHasMore] = useState(true);
+
   const getMonth = (date: string) => {
     const $d = new Date(date);
     return new Intl.DateTimeFormat("pt-BR", { month: "long" }).format($d);
@@ -37,11 +40,21 @@ export default function Transactions() {
     )} - ${day}/${month}/${year}`;
   };
 
-  const getTransactionsList = async () => {
+  const getTransactionsList = async (currentPage = 1) => {
+    if (!hasMore) return;
+
     setLoading(true);
     try {
-      const data = await getTransactions();
-      setTransactions(data);
+      const data = await getTransactions(`?page=${currentPage}&size=10`);
+
+      // Acumular transações
+      setTransactions((prevTransactions) => [
+        ...prevTransactions,
+        ...data.transactions,
+      ]);
+
+      // Verificar se há mais páginas
+      setHasMore(data.transactions.length > 0);
     } catch (err) {
       console.log("errorGettingTransactions");
     } finally {
@@ -62,8 +75,24 @@ export default function Transactions() {
     setSelectedTransaction(transaction);
   };
 
+  const handleScroll = () => {
+    if (
+      window.innerHeight + window.scrollY >=
+      document.documentElement.offsetHeight - 100
+    ) {
+      if (!loading) {
+        setPage((prevPage) => prevPage + 1);
+      }
+    }
+  };
+
   useEffect(() => {
-    getTransactionsList();
+    getTransactionsList(page);
+  }, [page]);
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   return (
@@ -103,6 +132,44 @@ export default function Transactions() {
         </span>
       </div>
 
+      {filteredTransactions.map((transaction: Transaction, index) => (
+        <section className="list-group mt-3" key={index}>
+          <div
+            style={{ cursor: "pointer" }}
+            className="list-group-item py-3"
+            aria-current="true"
+          >
+            <div className="d-flex justify-content-between align-items-center mb-3">
+              <small>
+                <strong className="text-success text-capitalize">
+                  <i className="me-2 fa-solid fa-calendar-days"></i>
+                  {getMonth(transaction.date)}
+                </strong>
+              </small>
+              <div style={{ gap: 8 }} className="d-flex align-items-center">
+                <span className="badge rounded-pill bg-secondary">
+                  {TRANSACTION_TYPES[transaction.type]}
+                </span>
+                <i
+                  className="fa-solid fa-edit text-success"
+                  data-bs-toggle="modal"
+                  data-bs-target="#transactionModalEdit"
+                  onClick={() => handleEditClick(transaction)}
+                ></i>
+              </div>
+            </div>
+            <div className="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center">
+              <small className="text-capitalize">
+                {transaction.description}
+              </small>
+              <small className="text-muted">
+                {getCompleteDate(transaction.date)}
+              </small>
+            </div>
+          </div>
+        </section>
+      ))}
+
       {loading && (
         <span
           className="spinner-border spinner-border-sm text-center mt-3 text-success d-block mx-auto"
@@ -111,50 +178,11 @@ export default function Transactions() {
         ></span>
       )}
 
-      {!loading && filteredTransactions.length === 0 && (
-        <small className="d-block py-3 text-muted">
-          Nenhuma transação encontrada.
+      {!loading && !hasMore && (
+        <small className="d-block py-3 text-muted text-center">
+          Todas as transações foram carregadas.
         </small>
       )}
-
-      {!loading &&
-        filteredTransactions.map((transaction: Transaction, index) => (
-          <section className="list-group mt-3" key={index}>
-            <div
-              style={{ cursor: "pointer" }}
-              className="list-group-item py-3"
-              aria-current="true"
-            >
-              <div className="d-flex justify-content-between align-items-center mb-3">
-                <small>
-                  <strong className="text-success text-capitalize">
-                    <i className="me-2 fa-solid fa-calendar-days"></i>
-                    {getMonth(transaction.date)}
-                  </strong>
-                </small>
-                <div style={{ gap: 8 }} className="d-flex align-items-center">
-                  <span className="badge rounded-pill bg-secondary">
-                    {TRANSACTION_TYPES[transaction.type]}
-                  </span>
-                  <i
-                    className="fa-solid fa-edit text-success"
-                    data-bs-toggle="modal"
-                    data-bs-target="#transactionModalEdit"
-                    onClick={() => handleEditClick(transaction)}
-                  ></i>
-                </div>
-              </div>
-              <div className="d-flex flex-column flex-sm-row justify-content-between align-items-sm-center">
-                <small className="text-capitalize">
-                  {transaction.description}
-                </small>
-                <small className="text-muted">
-                  {getCompleteDate(transaction.date)}
-                </small>
-              </div>
-            </div>
-          </section>
-        ))}
 
       <TransactionModalEdit transaction={selectedTransaction} />
     </>

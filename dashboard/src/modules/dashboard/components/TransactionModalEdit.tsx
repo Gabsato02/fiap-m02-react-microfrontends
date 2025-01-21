@@ -44,14 +44,18 @@ export default function TransactionModalEdit({ transaction }) {
         description,
       };
 
+      // Atualizar a transação
       await editTransaction(payload, transaction.id);
 
+      // Obter todas as transações
       const allTransactions = await getTransactions();
-      setTransactions(allTransactions);
+      setTransactions(allTransactions.transactions);
 
+      // Atualizar informações do usuário
       const newUserInfo = await getUser();
       setUserInfo(newUserInfo);
 
+      // Resetar o formulário
       reset({
         description: "",
         amount: "",

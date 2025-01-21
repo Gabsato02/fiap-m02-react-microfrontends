@@ -5,8 +5,38 @@ const listTransactions = (req, res) => {
 	const db = dbService.readDB();
 	const userTransactions =
 		db.transactions?.filter((t) => t.userId === req.user.id) || [];
-	res.json(userTransactions);
+
+	// Obter os parâmetros de paginação
+	const { page, size } = req.query;
+
+	if (page && size) {
+		const pageNumber = parseInt(page, 10);
+		const pageSize = parseInt(size, 10);
+
+		// Validar paginação
+		if (isNaN(pageNumber) || isNaN(pageSize) || pageNumber < 1 || pageSize < 1) {
+			return res.status(400).json({ error: 'Parâmetros de paginação inválidos.' });
+		}
+
+		// Calcular o índice inicial e final
+		const startIndex = (pageNumber - 1) * pageSize;
+		const endIndex = startIndex + pageSize;
+
+		// Retornar a página específica
+		const paginatedTransactions = userTransactions.slice(startIndex, endIndex);
+
+		return res.json({
+			transactions: paginatedTransactions,
+			total: userTransactions.length,
+			page: pageNumber,
+			size: pageSize,
+		});
+	}
+
+	// Se não houver paginação, retornar todas as transações
+	res.json({ transactions: userTransactions, total: userTransactions.length });
 };
+
 
 // Criar Transação
 const createTransaction = (req, res) => {

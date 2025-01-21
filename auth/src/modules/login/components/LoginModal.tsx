@@ -1,8 +1,8 @@
 import React from "react";
 import { useForm } from "react-hook-form";
-import { navigateToUrl } from 'single-spa';
-import loginImage from '../assets/login-desktop.svg';
-import loginImageMobile from '../assets/login-mobile.svg';
+import { navigateToUrl } from "single-spa";
+import loginImage from "../assets/login-desktop.svg";
+import loginImageMobile from "../assets/login-mobile.svg";
 import { login } from "../services";
 import { Button } from "../../../components";
 import { UserAuth } from "../../../types";
@@ -13,13 +13,17 @@ export default function LoginModal() {
   const [loading, setLoading] = React.useState(false);
   const [hasError, setError] = React.useState(false);
 
-  const { 
-    register, 
-    handleSubmit, 
-    formState: { 
-      isValid 
-    }
-  } = useForm({ mode: 'onChange' });
+  const {
+    register,
+    handleSubmit,
+    formState: { isValid },
+  } = useForm({
+    mode: "onChange",
+    defaultValues: {
+      email: "usuario@teste.com",
+      password: "senha123",
+    },
+  });
 
   const handleLogin = async (payload: UserAuth) => {
     setLoading(true);
@@ -27,14 +31,15 @@ export default function LoginModal() {
     try {
       const data = await login(payload);
 
-      if (data.token) localStorage.setItem(AUTH_TOKEN, data.token);
+      if (data.token) {
+        localStorage.setItem(AUTH_TOKEN, data.token);
+      }
 
-      closeModal('loginModal');
-
-      navigateToUrl('/dashboard');
+      closeModal("loginModal");
+      navigateToUrl("/dashboard");
     } catch (err) {
-      console.log('errorLoggingUser');  
-      setError(true);    
+      console.error("Error logging in user", err);
+      setError(true);
     } finally {
       setLoading(false);
     }
@@ -51,9 +56,21 @@ export default function LoginModal() {
       <div className="modal-dialog">
         <div className="modal-content">
           <div className="modal-body">
-            <img src={loginImage} className="img-fluid mx-auto d-none d-md-block" alt="..."></img>
-            <img src={loginImageMobile} className="d-block mx-auto d-md-none img-fluid" alt="..."></img>
-            <form className="mt-3" noValidate onSubmit={handleSubmit(handleLogin)}>
+            <img
+              src={loginImage}
+              className="img-fluid mx-auto d-none d-md-block"
+              alt="Login desktop"
+            />
+            <img
+              src={loginImageMobile}
+              className="d-block mx-auto d-md-none img-fluid"
+              alt="Login mobile"
+            />
+            <form
+              className="mt-3"
+              noValidate
+              onSubmit={handleSubmit(handleLogin)}
+            >
               <div className="mb-3">
                 <label htmlFor="email" className="form-label">
                   E-mail
@@ -64,7 +81,7 @@ export default function LoginModal() {
                   id="email"
                   placeholder="Digite seu e-mail"
                   required
-                  {...register('email', { required: true })}
+                  {...register("email", { required: true })}
                 />
               </div>
               <div className="mb-3">
@@ -74,17 +91,24 @@ export default function LoginModal() {
                 <div className="input-group">
                   <input
                     type="password"
-                    className={`form-control ${hasError && 'is-invalid'}`}
+                    className={`form-control ${hasError ? "is-invalid" : ""}`}
                     id="password"
                     placeholder="Digite sua senha"
                     required
-                    {...register('password', { required: true })}
+                    {...register("password", { required: true })}
                   />
-                  <div className="invalid-feedback">Credenciais inválidas</div>
+                  {hasError && (
+                    <div className="invalid-feedback">
+                      Credenciais inválidas
+                    </div>
+                  )}
                 </div>
               </div>
               <div className="mb-3 text-end">
-                <a href="/recuperar-senha" className="text-decoration-none text-danger">
+                <a
+                  href="/recuperar-senha"
+                  className="text-decoration-none text-danger"
+                >
                   <small>Esqueci minha senha</small>
                 </a>
               </div>
@@ -95,7 +119,7 @@ export default function LoginModal() {
                 className="w-100"
                 disabled={!isValid}
                 isLoading={loading}
-              ></Button>
+              />
             </form>
           </div>
         </div>

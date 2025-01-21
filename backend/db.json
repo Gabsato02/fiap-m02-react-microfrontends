@@ -12,6 +12,21 @@
         -9,
         96
       ]
+    },
+    {
+      "id": 1734893944621,
+      "username": "Usuario Teste",
+      "email": "usuario@teste.com",
+      "password": "senha123",
+      "balance": 1500,
+      "history": [
+        0,
+        500,
+        -200,
+        1200,
+        300,
+        1500
+      ]
     }
   ],
   "transactions": [
@@ -38,6 +53,214 @@
       "amount": 105,
       "type": "payment",
       "date": "2024-12-22T19:00:06.493Z"
+    },
+    {
+      "id": 1735000000001,
+      "userId": 1734893944621,
+      "description": "Teste edicao",
+      "amount": 500,
+      "type": "deposit",
+      "date": "2025-01-15T10:00:00.000Z"
+    },
+    {
+      "id": 1735000000002,
+      "userId": 1734893944621,
+      "description": "Pagamento de conta",
+      "amount": -200,
+      "type": "payment",
+      "date": "2025-01-16T15:30:00.000Z"
+    },
+    {
+      "id": 1735000000003,
+      "userId": 1734893944621,
+      "description": "Transferência recebida",
+      "amount": 1200,
+      "type": "transfer",
+      "date": "2025-01-17T14:45:00.000Z"
+    },
+    {
+      "id": 1735000000004,
+      "userId": 1734893944621,
+      "description": "Compra no mercado",
+      "amount": -100,
+      "type": "payment",
+      "date": "2025-01-18T11:20:00.000Z"
+    },
+    {
+      "id": 1735000000005,
+      "userId": 1734893944621,
+      "description": "Depósito extra",
+      "amount": 300,
+      "type": "deposit",
+      "date": "2025-01-19T09:10:00.000Z"
+    },
+    {
+      "id": 1735000000006,
+      "userId": 1734893944621,
+      "description": "Jantar no restaurante",
+      "amount": -50,
+      "type": "payment",
+      "date": "2025-01-19T20:00:00.000Z"
+    },
+    {
+      "id": 1735000000001,
+      "userId": 1734893944621,
+      "description": "Depósito inicial",
+      "amount": 1000,
+      "type": "deposit",
+      "date": "2025-01-01T08:00:00.000Z"
+    },
+    {
+      "id": 1735000000002,
+      "userId": 1734893944621,
+      "description": "Pagamento de conta de luz",
+      "amount": -150,
+      "type": "payment",
+      "date": "2025-01-02T10:15:00.000Z"
+    },
+    {
+      "id": 1735000000003,
+      "userId": 1734893944621,
+      "description": "Transferência para João",
+      "amount": -200,
+      "type": "transfer",
+      "date": "2025-01-03T12:30:00.000Z"
+    },
+    {
+      "id": 1735000000004,
+      "userId": 1734893944621,
+      "description": "Recebimento de salário",
+      "amount": 2500,
+      "type": "deposit",
+      "date": "2025-01-05T09:00:00.000Z"
+    },
+    {
+      "id": 1735000000005,
+      "userId": 1734893944621,
+      "description": "Compra no supermercado",
+      "amount": -350,
+      "type": "payment",
+      "date": "2025-01-06T14:45:00.000Z"
+    },
+    {
+      "id": 1735000000006,
+      "userId": 1734893944621,
+      "description": "Pagamento de aluguel",
+      "amount": -1200,
+      "type": "payment",
+      "date": "2025-01-07T18:00:00.000Z"
+    },
+    {
+      "id": 1735000000007,
+      "userId": 1734893944621,
+      "description": "Transferência recebida de Maria",
+      "amount": 300,
+      "type": "transfer",
+      "date": "2025-01-08T13:20:00.000Z"
+    },
+    {
+      "id": 1735000000008,
+      "userId": 1734893944621,
+      "description": "Jantar em restaurante",
+      "amount": -90,
+      "type": "payment",
+      "date": "2025-01-09T20:10:00.000Z"
+    },
+    {
+      "id": 1735000000009,
+      "userId": 1734893944621,
+      "description": "Retirada no caixa eletrônico",
+      "amount": -500,
+      "type": "withdraw",
+      "date": "2025-01-10T11:00:00.000Z"
+    },
+    {
+      "id": 1735000000010,
+      "userId": 1734893944621,
+      "description": "Depósito extra",
+      "amount": 700,
+      "type": "deposit",
+      "date": "2025-01-11T09:45:00.000Z"
+    },
+    {
+      "id": 1735000000011,
+      "userId": 1734893944621,
+      "description": "Manutenção do carro",
+      "amount": -600,
+      "type": "payment",
+      "date": "2025-01-12T16:30:00.000Z"
+    },
+    {
+      "id": 1735000000012,
+      "userId": 1734893944621,
+      "description": "Compra de roupas",
+      "amount": -250,
+      "type": "payment",
+      "date": "2025-01-13T15:50:00.000Z"
+    },
+    {
+      "id": 1735000000013,
+      "userId": 1734893944621,
+      "description": "Pagamento de academia",
+      "amount": -120,
+      "type": "payment",
+      "date": "2025-01-14T07:40:00.000Z"
+    },
+    {
+      "id": 1735000000014,
+      "userId": 1734893944621,
+      "description": "Transferência para Pedro",
+      "amount": -350,
+      "type": "transfer",
+      "date": "2025-01-15T18:25:00.000Z"
+    },
+    {
+      "id": 1735000000015,
+      "userId": 1734893944621,
+      "description": "Transferência recebida de Ana",
+      "amount": 450,
+      "type": "transfer",
+      "date": "2025-01-16T12:10:00.000Z"
+    },
+    {
+      "id": 1735000000016,
+      "userId": 1734893944621,
+      "description": "Depósito via PIX",
+      "amount": 1000,
+      "type": "deposit",
+      "date": "2025-01-17T14:00:00.000Z"
+    },
+    {
+      "id": 1735000000017,
+      "userId": 1734893944621,
+      "description": "Compra de eletrônicos",
+      "amount": -800,
+      "type": "payment",
+      "date": "2025-01-18T10:30:00.000Z"
+    },
+    {
+      "id": 1735000000018,
+      "userId": 1734893944621,
+      "description": "Pagamento de curso online",
+      "amount": -200,
+      "type": "payment",
+      "date": "2025-01-19T08:50:00.000Z"
+    },
+    {
+      "id": 1735000000019,
+      "userId": 1734893944621,
+      "description": "Recebimento de comissão",
+      "amount": 500,
+      "type": "deposit",
+      "date": "2025-01-20T17:15:00.000Z"
+    },
+    {
+      "id": 1735000000020,
+      "userId": 1734893944621,
+      "description": "Pagamento de consulta médica",
+      "amount": -150,
+      "type": "payment",
+      "date": "2025-01-21T09:30:00.000Z"
     }
   ]
 }
