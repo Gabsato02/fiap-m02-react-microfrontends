@@ -19,10 +19,6 @@ export default function LoginModal() {
     formState: { isValid },
   } = useForm({
     mode: "onChange",
-    defaultValues: {
-      email: "usuario@teste.com",
-      password: "senha123",
-    },
   });
 
   const handleLogin = async (payload: UserAuth) => {
